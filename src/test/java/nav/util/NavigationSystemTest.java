@@ -32,4 +32,11 @@ public class NavigationSystemTest {
         String result2 = system.navigate("walk", "A", null);
         assertTrue(result2.contains("不能为空"), "空终点应该提示导航失败");
     }
+        // 新增功能测试：骑行导航
+    @Test
+    public void testBikeMode() {
+        String result = system.navigate("bike", "A", "B");
+        assertNotNull(result, "bike 模式不应返回 null");
+        assertTrue(result.contains("骑行导航"), "结果应包含'骑行导航'");
+    }
 }
