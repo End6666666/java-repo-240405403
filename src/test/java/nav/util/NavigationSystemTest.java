@@ -14,21 +14,22 @@ public class NavigationSystemTest {
         system = new NavigationSystem();
     }
 
-    // 要求(1)：指定起点、终点导航正常返回
+    // 功能1：指定起点、终点导航正常返回
     @Test
     public void testWalkMode() {
         String result = system.navigate("walk", "A", "B");
         assertNotNull(result, "walk 模式不应返回 null");
-        assertTrue(result.contains("步行"), "walk 模式应包含'步行'");
+        // 优化点：断言同步更新，匹配新的【步行导航】格式
+        assertTrue(result.contains("【步行导航】"), "结果应包含'【步行导航】'");
     }
 
-    // 要求(2)：输入容错测试处理
+    // 功能2：输入容错测试处理
     @Test
     public void testInvalidInput() {
-        String result1 = system.navigate("walk", "", "B"); // 空起点
+        String result1 = system.navigate("walk", "", "B");
         assertTrue(result1.contains("不能为空"), "空起点应该提示导航失败");
         
-        String result2 = system.navigate("walk", "A", null); // 空终点
+        String result2 = system.navigate("walk", "A", null);
         assertTrue(result2.contains("不能为空"), "空终点应该提示导航失败");
     }
 }
